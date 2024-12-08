@@ -14,6 +14,20 @@ class AbstractAPICollector(ABC):
     - Error handling for robustness.
     """
 
+    def _configure_session(self) -> requests.Session:
+        """
+        Configures the requests session for API interaction.
+
+        Returns:
+            requests.Session: Configured session with appropriate headers or authentication.
+        """
+        session = requests.Session()
+        if self.api_key:
+            session.headers.update({"Authorization": f"Bearer {self.api_key}"})
+        if self.username and self.password:
+            session.auth = (self.username, self.password)
+        return session
+
     def __init__(self, base_url: str, api_key: Optional[str] = None, username: Optional[str] = None, password: Optional[str] = None):
         """
         Initialize the API collector.
@@ -30,20 +44,6 @@ class AbstractAPICollector(ABC):
         self.password = password
         self.session = self._configure_session()
         self.logger = configure_logger(self.__class__.__name__)
-
-    def _configure_session(self) -> requests.Session:
-        """
-        Configures the requests session for API interaction.
-
-        Returns:
-            requests.Session: Configured session with appropriate headers or authentication.
-        """
-        session = requests.Session()
-        if self.api_key:
-            session.headers.update({"Authorization": f"Bearer {self.api_key}"})
-        if self.username and self.password:
-            session.auth = (self.username, self.password)
-        return session
 
     def _make_request(self, method: str, endpoint: str, params: Optional[Dict[str, Any]] = None, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """

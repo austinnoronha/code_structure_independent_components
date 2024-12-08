@@ -38,4 +38,3 @@ def log_and_trace(logger: logging.Logger, method_name: str, start_time: float, r
         logger.info(f"{method_name} completed in {elapsed_time:.2f}s with status code {response.status_code}")
     else:
         logger.info(f"{method_name} completed in {elapsed_time:.2f}s")
-
