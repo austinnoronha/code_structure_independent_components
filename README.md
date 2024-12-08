@@ -131,6 +131,28 @@ $ pytest
 
 ---
 
+## Reusability Components (Examples)
+
+### Logging and Performance Time
+If another class needs logging or tracing, it can now simply call these utilities:
+
+```python
+from src.utils.logging import configure_logger, log_and_trace
+
+class AnotherAPICollector:
+    def __init__(self):
+        self.logger = configure_logger("AnotherAPICollector")
+
+    def some_method(self):
+        start_time = time.time()
+        # Simulate some processing
+        time.sleep(1)
+        log_and_trace(self.logger, "some_method", start_time)
+
+```
+
+---
+
 ## Contribution Guidelines
 - Follow PEP8 standards.
 - Write clear docstrings for every class and function.

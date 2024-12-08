@@ -23,6 +23,7 @@ poetry.lock
 .vscode/
 .venv/
 venv/
+.env
 
 # Logs and temp files
 *.log
