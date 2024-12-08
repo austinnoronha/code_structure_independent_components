@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Packages
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+
+# Poetry environment
+poetry.lock
+
+# Pytest cache
+.cache/
+.*cache/
+
+# System-specific files
+.DS_Store
+.vscode/
+.venv/
+venv/
+
+# Logs and temp files
+*.log
+tmp/

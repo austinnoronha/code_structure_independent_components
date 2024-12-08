@@ -1,0 +1,142 @@
+[tool.poetry]
+name = "code-structure-independent-components"
+version = "0.1.0"
+description = "This repository provides a structured framework to build Python-based services for - Application and Data Services."
+authors = ["Austin Noronha <austin_noronha@hotmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "*", from = "app"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "^2.32.3"
+python-dotenv = "^1.0.1"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^4.0.1"
+black = "^24.10.0"
+ssort = "^0.14.0"
+isort = "^5.13.2"
+
+
+[build-system]
+# Minimum requirements for the build system to execute.
+requires = ["poetry-core", "setuptools"] # PEP 508 specifications.
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests"
+]
+
+[tool.black]
+line-length = 150
+target-version = ["py38", "py39"]
+skip-string-normalization = true
+
+[tool.isort]
+profile = "black" 
+
+[tool.ruff]
+# Same as Black. This is updated for Kepler … repo
+line-length = 150 
+indent-width = 4
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages"
+]
+
+# Assume Python 3.9 - to be modified with the Python version being used
+target-version = "py39"
+
+[tool.ruff.lint]
+# 1. Enable 
+extend-select = [
+ "D",     # pydocstyle
+  "E501",  # enforce line length
+  "UP",    # pyupgrade
+]
+
+
+# 2. Avoid enforcing line-length violations (`E501`)
+ignore = [
+    "E501",
+    # Relax the convention by _not_ requiring documentation for every function parameter.
+    "D417",
+    # Relax the convention by _not_ requiring First line should end with a period.
+    "D400",
+    # Relax the convention by _not_ requiring One-line docstring should fit on one line.
+    "D200",
+    # Relax the convention by _not_ requiring Missing docstring in public module.
+    "D100",
+    # Relax the convention by _not_ requiring Missing docstring in public class.
+    "D101",
+    # Relax the convention by _not_ requiring Missing docstring in public method.
+    "D102",
+    # Relax the convention by _not_ requiring Missing docstring in public function.
+    "D103",
+    # Relax the convention by _not_ requiring Missing docstring in `__init__`.
+    "D107",
+    # Relax the convention by _not_ requiring First line of docstring should be in imperative mood: "This function returns top narratives sorted by volume".
+    "D401",
+    # Relax the convention by _not_ requiring 1 blank line required between summary line and description.
+    "D205",
+    # Relax the convention by _not_ requiring Local variable `trigram_or_query` is assigned to but never used
+    "F841"
+]
+# 3. Avoid trying to fix flake8-bugbear (`B`) violations.
+unfixable = ["B"]
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+#
+# This is currently disabled by default, but it is planned for this
+# to be opt-out in the future.
+docstring-code-format = false
+
+# Set the line length limit used when formatting code snippets in
+# docstrings.
+#
+# This only has an effect when the `docstring-code-format` setting is
+# enabled.
+docstring-code-line-length = "dynamic"
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"  # Accepts: "google", "numpy", or "pep257".

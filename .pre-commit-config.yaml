@@ -1,0 +1,38 @@
+fail_fast: true
+repos:
+- repo: local
+  hooks:
+    - id: ssort
+      name: ssort
+      entry: poetry run ssort
+      language: system
+      types: [python]
+    - id: isort
+      name: isort
+      entry: poetry run isort
+      language: system
+      types: [python]
+      args: ["--profile", "black"]
+    - id: black
+      name: black
+      entry: poetry run black
+      language: system
+      types: [python]
+    - id: ruff
+      name: ruff
+      entry: poetry run ruff check
+      language: system
+      types: [python]
+      args: [--fix]
+    - id: pytest
+      name: pytest
+      entry: poetry run coverage run
+      pass_filenames: false
+      language: system
+      types: [python]
+    - id: coverage
+      name: coverage
+      entry: poetry run coverage report
+      pass_filenames: false
+      language: system
+      types: [python]
